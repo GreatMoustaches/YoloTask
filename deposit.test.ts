@@ -57,3 +57,19 @@ it("User doesn't exist", async () => {
     error: "User doesn't exist",
   });
 });
+
+it("Deposit executes in acceptable time", async () => {
+  const data = { amount: 999, userId: "SDCS3243YGD" };
+  const start = Date.now();
+
+  const response = await fetch("https://api.example.com/deposit", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+
+  const end = Date.now();
+  const time = end - start;
+
+  expect(response.status).toBe(200);
+  expect(time).toBeLessThanOrEqual(4000);
+});
